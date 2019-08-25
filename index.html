@@ -13,7 +13,9 @@
         window.walletName='NEO wallet'
         window.pubkey="test pub key"
     </script>
+    <!-- this script is injeceted by cobo wallet and add the coboNeoDapi object on window -->
     <script src="https://d.cobowallet.cn/public/static/cobo-neo-dapi.min_a9139881144214a5c708.js"></script>
+    <!-- use the coboNeoDapi to interact with cobo walet for neo dapp -->
      <script>
             function send() {
                 if (window.coboNeoDapi && window.coboNeoDapi.isReady) {
