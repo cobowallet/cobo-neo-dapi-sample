@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Test NEO Dapp Page</title>
+    <script
+        src="https://cobo-oss.oss-cn-hangzhou.aliyuncs.com/public/static/cobo-neo-dapi.min_4ee18bcb7eae5f7a838f.js"></script>
+</head>
+
+<body>
+    <div>hello NEO Dapi</div>
+    <script>
+        if (window.coboNeoDapi.isReady) {
+            window.coboNeoDapi.addEventListener("TRANSACTION_CONFIRMED", (data) => {
+                console.log("-------------", data);
+            });
+
+            const result = window.coboNeoDapi.invokeMulti({
+                invokeArgs: [
+                    {
+                        scriptHash: "505663a29d83663a838eee091249abd167e928f5",
+                        operation: "storeData",
+                        args: [
+                            {
+                                type: "String",
+                                value: "hello",
+                            },
+                        ],
+                        attachedAssets: {
+                            NEO: "10",
+                            GAS: "0.0001",
+                        },
+                        triggerContractVerification: true,
+                    },
+                    {
+                        scriptHash: "505663a29d83663a838eee091249abd167e928f5",
+                        operation: "purchaseTicket",
+                        args: [
+                            {
+                                type: "Integer",
+                                value: "10",
+                            },
+                        ],
+                    },
+                ],
+                fee: "0.001",
+                network: "TestNet",
+                broadcastOverride: false,
+            }).then(console.log).catch(console.error);
+        } else {
+            console.error('coboNeoDapi is not ready')
+        }
+    </script>
+</body>
+
+</html>
